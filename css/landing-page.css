@@ -19,10 +19,12 @@ body, h1, h2, h3, h4, h5, h6 {
   padding-bottom: 50px;
   text-align: center;
   color: #f8f8f8;
+
   background: url(../img/logo.jpg) no-repeat center center;
 
+
   background-color: black;
-  background-size: contain;
+  /*background-size: contain;*/
   height: 100vh;
 
   /*background-size: cover;*/
@@ -156,21 +158,7 @@ background-position: -100px;*/
   }
 }
 
-@media(max-width:767px) {
-  .banner h2 {
-    margin: 0;
-    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
-    font-size: 3em;
-  }
-  ul.banner-social-buttons>li {
-    display: block;
-    margin-bottom: 20px;
-    padding: 0;
-  }
-  ul.banner-social-buttons>li:last-child {
-    margin-bottom: 0;
-  }
-}
+
 
 footer {
   padding: 50px 0;
@@ -183,6 +171,10 @@ p.copyright {
 
 .lead {
   font-size: 15px;
+}
+.lead-about {
+  font-size: 20px;
+  text-align: center;
 }
 nav {
   background-color: rgba(255, 255, 255, 0.1);
@@ -204,4 +196,23 @@ nav {
 .content-section-b img:hover {
   opacity: 0.5;
 
+}
+@media(max-width:767px) {
+  .banner h2 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+    font-size: 3em;
+  }
+  ul.banner-social-buttons>li {
+    display: block;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+  ul.banner-social-buttons>li:last-child {
+    margin-bottom: 0;
+  }
+  .lead-about {
+    font-size: 15px;
+    text-align: center;
+  }
 }
