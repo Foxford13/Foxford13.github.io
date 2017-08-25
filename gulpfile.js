@@ -1,59 +1,50 @@
-const gulp        = require('gulp');
-const babel       = require('gulp-babel');
-const sass        = require('gulp-sass');
-const cleanCSS 	  = require('gulp-clean-css');
-const uglify      = require('gulp-uglify');
-const browserSync = require('browser-sync').create();
-const notify      = require('gulp-notify');
-const plumber     = require('gulp-plumber');
-const sourcemaps  = require('gulp-sourcemaps');
+var gulp = require('gulp');
+var browserSync = require('browser-sync').create();
+var pkg = require('./package.json');
 
-function reportError(error) {
-  notify({
-    title: `Task Failed [${error.plugin}]`,
-    message: 'Check the console.'
-  }).write(error);
-  console.log(error.toString());
-  this.emit('end');
-}
+// Copy vendor files from /node_modules into /vendor
+// NOTE: requires `npm install` before running!
+gulp.task('copy', function() {
+  gulp.src([
+      'node_modules/bootstrap/dist/**/*',
+      '!**/npm.js',
+      '!**/bootstrap-theme.*',
+      '!**/*.map'
+    ])
+    .pipe(gulp.dest('vendor/bootstrap'))
 
-gulp.task('es6', () => {
-  return gulp.src('src/js/*.js')
-  .pipe(plumber({ errorHandler: reportError }))
-  .pipe(sourcemaps.init())
-  .pipe(babel({ presets: ['es2015'] }))
-  .pipe(uglify())
-  .pipe(sourcemaps.write())
-  .pipe(gulp.dest('public/js'));
-});
+  gulp.src(['node_modules/jquery/dist/jquery.js', 'node_modules/jquery/dist/jquery.min.js'])
+    .pipe(gulp.dest('vendor/jquery'))
 
-gulp.task('sass', () => {
-  return gulp.src('src/scss/**/*.scss')
-  .pipe(plumber({ errorHandler: reportError }))
-  .pipe(sourcemaps.init())
-  .pipe(sass().on('error', sass.logError))
-  .pipe(cleanCSS({ compatibility: 'ie8'}))
-  .pipe(sourcemaps.write())
-  .pipe(gulp.dest('public/css'));
-});
+  gulp.src(['node_modules/popper.js/dist/umd/popper.js', 'node_modules/popper.js/dist/umd/popper.min.js'])
+    .pipe(gulp.dest('vendor/popper'))
 
-gulp.task('assets', () => {
-  return gulp.src('src/assets/**/*')
-    .pipe(gulp.dest('public/assets'));
-});
+  gulp.src([
+      'node_modules/font-awesome/**',
+      '!node_modules/font-awesome/**/*.map',
+      '!node_modules/font-awesome/.npmignore',
+      '!node_modules/font-awesome/*.txt',
+      '!node_modules/font-awesome/*.md',
+      '!node_modules/font-awesome/*.json'
+    ])
+    .pipe(gulp.dest('vendor/font-awesome'))
+})
 
-gulp.task('serve', ['es6', 'sass'], () => {
+// Default task
+gulp.task('default', ['copy']);
+
+// Configure the browserSync task
+gulp.task('browserSync', function() {
   browserSync.init({
-    files: ['public/**/*.*'],
-    browser: 'google chrome',
-    port: 7000,
-    reloadDelay: 500,
-    server: { baseDir: './' }
-  });
-});
+    server: {
+      baseDir: ''
+    },
+  })
+})
 
-gulp.task('default', ['sass', 'es6', 'assets', 'serve'], () => {
-  gulp.watch('src/scss/**/*.scss', ['sass']);
-  gulp.watch('src/js/*.js', ['es6']);
-  gulp.watch('src/assets/**/*', ['assets']);
+// Dev task with browserSync
+gulp.task('dev', ['browserSync'], function() {
+  // Reloads the browser whenever HTML or CSS files change
+  gulp.watch('css/*.css', browserSync.reload);
+  gulp.watch('*.html', browserSync.reload);
 });
