@@ -191,10 +191,12 @@ nav {
 
 .content-section-a img:hover {
   opacity: 0.5;
+  cursor: pointer;
 
 }
 .content-section-b img:hover {
   opacity: 0.5;
+  cursor: pointer;
 
 }
 @media(max-width:767px) {
@@ -215,4 +217,7 @@ nav {
     font-size: 15px;
     text-align: center;
   }
+}
+.lead-about {
+  font-size: 18px;
 }
