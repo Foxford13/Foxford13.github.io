@@ -27,7 +27,7 @@ body, h1, h2, h3, h4, h5, h6 {
   background-size: contain;
   height: 100vh;
 
-  /*background-size: cover;*/
+
 }
 
 .intro-message {
@@ -182,16 +182,34 @@ nav {
 #skills i {
   font-size: 50px;
   padding: 15px;
-  letter-spacing: 10px;
+  /*letter-spacing: 25px;*/
+  line-height: 75px;
+  margin: 20px;
 }
 #skills {
     text-align: center;
 
 }
+/*.content-section-a img {
+  opacity: 0.5;
+  cursor: pointer;
+
+
+
+}
+.content-section-b img {
+  opacity: 0.5;
+  cursor: pointer;
+
+
+
+}*/
 
 .content-section-a img:hover {
   opacity: 0.5;
   cursor: pointer;
+
+
 
 }
 .content-section-b img:hover {
@@ -216,6 +234,13 @@ nav {
   .lead-about {
     font-size: 15px;
     text-align: center;
+  }
+  #skills i {
+    font-size: 50px;
+    padding: 15px;
+    /*letter-spacing: 25px;*/
+    line-height: 50px;
+    margin: 10px;
   }
 }
 .lead-about {
