@@ -75,6 +75,7 @@ body, h1, h2, h3, h4, h5, h6 {
   .intro-divider {
     width: 100%;
   }
+
 }
 
 .network-name {
@@ -166,6 +167,10 @@ a:focus{
     float: left;
     margin-top: 15px;
   }
+  /*how make navbar adjust to size of text on click*/
+  /*.navbar-expand-lg {
+    height: 300px;
+  }*/
 }
 
 
@@ -180,7 +185,7 @@ p.copyright {
 }
 
 .lead {
-  font-size: 15px;
+  font-size: 17px;
 }
 .lead-about {
   font-size: 20px;
